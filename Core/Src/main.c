@@ -93,6 +93,16 @@ int main(void)
   //Inicjalizacja wyswietlacza:
   lcd_init();
 
+  //Rysowanie kolorowych prostokatow:
+  lcd_fill_box(0, 0, 160, 16, RED);
+  lcd_fill_box(0, 16, 160, 16, GREEN);
+  lcd_fill_box(0, 32, 160, 16, BLUE);
+  lcd_fill_box(0, 48, 160, 16, YELLOW);
+  lcd_fill_box(0, 64, 160, 16, MAGENTA);
+  lcd_fill_box(0, 80, 160, 16, CYAN);
+  lcd_fill_box(0, 96, 160, 16, WHITE);
+  lcd_fill_box(0, 112, 160, 16, BLACK);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

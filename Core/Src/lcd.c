@@ -33,6 +33,11 @@
 //Makro ustawiające 9 bit 16-bitowej zmiennej na 1 w celu wyslania danych jako komenda:
 #define CMD(x)					((x) | 0x100)
 
+//Definicja stalych zawierajacych offset, poniewaz wyswyeitlacz ma rozdzielczosc 160 x 128, a
+//sterownik ST7735S obsluguje rozdzielczoscmdo 162 x 132:
+#define LCD_OFFSET_X 1
+#define LCD_OFFSET_Y 2
+
 //Tablica zawierajaca polecenia realizujace poczatkowa inicjalizacje wyswietlacza.
 //(pochodzi ona z programow dolaczonych do modulu przez producenta):
 static const uint16_t init_table[] = {
@@ -71,7 +76,7 @@ static void lcd_cmd(uint8_t cmd) {
 
 }
 
-//Funkcja wysylajaca komende do wyswietlacza:
+//Funkcja wysylajaca 8-bitow dane do wyswietlacza:
 static void lcd_data(uint8_t data) {
 
 	//Ustawienie stanu wysokiego na linii DC oznacza ze wysylamy dane:
@@ -82,6 +87,17 @@ static void lcd_data(uint8_t data) {
 	HAL_SPI_Transmit(&hspi2, &data, 1, HAL_MAX_DELAY);
 	//Ustawienie stanu wysokiego na linii CS oznacza ze konczymy komunikacje SPI:
 	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+
+}
+
+//Funkcja wysylajaca 16-bitowe dane do wyswietlacza (najpierw wysylany jest bardziej
+//znaczacy bajt, z pozniej mniej znaczacy):
+static void lcd_data16(uint16_t value) {
+
+	//Wyslanie bardziej znaczacego bajtu:
+	lcd_data(value >> 8);
+	//Wyslanie mniej znaczacego bajtu:
+	lcd_data(value);
 
 }
 
@@ -127,5 +143,31 @@ void lcd_init(void) {
 
 	//Wlaczenie wyswietlacza:
 	lcd_cmd(ST7735S_DISPON);
+}
+
+//Definicja okna które bedzie rysowane na wyswietlaczu:
+static void lcd_set_window(int x, int y, int width, int height)
+{
+  lcd_cmd(ST7735S_CASET);
+  lcd_data16(LCD_OFFSET_X + x);
+  lcd_data16(LCD_OFFSET_X + x + width - 1);
+
+  lcd_cmd(ST7735S_RASET);
+  lcd_data16(LCD_OFFSET_Y + y);
+  lcd_data16(LCD_OFFSET_Y + y + height- 1);
+}
+
+//Funkcja rysujaca kolorowy prostokat:
+void lcd_fill_box(int x, int y, int width, int height, uint16_t color) {
+
+	//Ustawienie obszaru rysowania:
+	lcd_set_window(x, y, width, height);
+
+	//Przeslanie danych do kolorowania pojedynczych pikseli:
+	lcd_cmd(ST7735S_RAMWR);
+	for(int i = 0; i < width * height; i++) {
+		lcd_data16(color);
+	}
+
 }
 
