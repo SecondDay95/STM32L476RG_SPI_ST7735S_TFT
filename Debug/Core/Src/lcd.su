@@ -5,3 +5,4 @@
 ../Core/Src/lcd.c:122:6:lcd_init	16	static
 ../Core/Src/lcd.c:149:13:lcd_set_window	24	static
 ../Core/Src/lcd.c:161:6:lcd_fill_box	32	static
+../Core/Src/lcd.c:175:6:lcd_put_pixel	32	static

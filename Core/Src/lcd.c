@@ -171,3 +171,11 @@ void lcd_fill_box(int x, int y, int width, int height, uint16_t color) {
 
 }
 
+//Funkcja rysujaca pojedynczy pixel:
+void lcd_put_pixel(int x, int y, uint16_t color) {
+
+	//Rysowanie pojedynczego pixela sprowadza sie do narysowania prostokata o
+	//wymiarach  1 x 1:
+	lcd_fill_box(x, y, 1, 1, color);
+}
+

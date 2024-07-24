@@ -103,6 +103,12 @@ int main(void)
   lcd_fill_box(0, 96, 160, 16, WHITE);
   lcd_fill_box(0, 112, 160, 16, BLACK);
 
+  //Rysowanie 2 skrzyżowanych ze soba linii:
+  for (int i = 0; i < 128; i++) {
+    lcd_put_pixel(i,  i, RED);
+    lcd_put_pixel(127 - i,  i, RED);
+  }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

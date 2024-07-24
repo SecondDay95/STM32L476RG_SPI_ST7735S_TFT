@@ -26,3 +26,6 @@ void lcd_init(void);
 
 //Funkcja rysujaca prostokaty:
 void lcd_fill_box(int x, int y, int width, int height, uint16_t color);
+
+//Funkcja rysujaca pojedynczy pixel:
+void lcd_put_pixel(int x, int y, uint16_t color);
