@@ -233,3 +233,21 @@ void lcd_copy(void) {
 	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
 
 }
+
+//Funkcja wywolywana po zakonczeniu transmisji po SPI (konczy transmisje):
+void lcd_transfer_done(void)
+{
+	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+}
+
+//Funkcja sprawdzajaca czy transmisja SPI dalej trwa:
+bool lcd_is_busy(void) {
+
+	if(HAL_SPI_GetState(&hspi2) == HAL_SPI_STATE_BUSY) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}

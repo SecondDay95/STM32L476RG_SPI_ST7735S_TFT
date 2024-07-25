@@ -10,6 +10,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <stdbool.h>
 
 //Stale definiujace rozdzielczosc wyswietlacza:
 #define LCD_WIDTH 	160
@@ -40,3 +41,9 @@ void lcd_put_pixel(int x, int y, uint16_t color);
 
 //Funkcja przesylajaca zawartosc bufora do wyswietlacza:
 void lcd_copy(void);
+
+//Funkcja wywolywana po zakonczeniu transmisji po SPI:
+void lcd_transfer_done(void);
+
+//Funkcja sprawdzajacy czy transmisja SPI dalej trwa (zwraca true gdy trwa, false gdy nie):
+bool lcd_is_busy(void);

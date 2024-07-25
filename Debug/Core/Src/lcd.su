@@ -6,3 +6,5 @@
 ../Core/Src/lcd.c:153:13:lcd_set_window	24	static
 ../Core/Src/lcd.c:191:6:lcd_put_pixel	24	static
 ../Core/Src/lcd.c:225:6:lcd_copy	8	static
+../Core/Src/lcd.c:238:6:lcd_transfer_done	8	static
+../Core/Src/lcd.c:244:6:lcd_is_busy	8	static

@@ -25,8 +25,16 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
- ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/gpio.h \
- ../Core/Inc/lcd.h ../Core/Src/forbot_logo.c
+ ../Core/Inc/dma.h ../Core/Inc/main.h ../Core/Inc/spi.h \
+ ../Core/Inc/gpio.h ../Core/Inc/lcd.h ../Core/Src/forbot_logo.c \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hagl.h \
+ ../Core/Inc/hagl_hal.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/font6x9.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb565.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb888.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hsl.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -54,8 +62,17 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h:
-../Core/Inc/spi.h:
+../Core/Inc/dma.h:
 ../Core/Inc/main.h:
+../Core/Inc/spi.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/lcd.h:
 ../Core/Src/forbot_logo.c:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hagl.h:
+../Core/Inc/hagl_hal.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/font6x9.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb565.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb888.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hsl.h:

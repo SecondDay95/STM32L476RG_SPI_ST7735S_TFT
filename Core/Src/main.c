@@ -18,13 +18,20 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "spi.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
 #include "lcd.h"
 #include "forbot_logo.c"
+//Dodanie plikow naglowkowych do funkcji uzywanych przez biblioteke hagl:
+#include "hagl.h"
+#include "font6x9.h"
+#include "rgb565.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +64,17 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint16_t test_image[64 * 64];
+
+//Funkcja wywolywna po zakonczeniu transmisji przez SPI:
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
+
+	if(hspi == &hspi2) {
+
+		lcd_transfer_done();
+
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -88,6 +106,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
@@ -119,7 +138,7 @@ int main(void)
   lcd_draw_image(35, 20, 100, 80, forbot_logo);
   */
 
-  //Rysowanie obrazów białych prostokatow:
+  //Rysowanie obrazów - białych prostokatow:
   /*
   for (int i = 0; i < 64 * 64; i++)
     test_image[i] = __REV16(BLUE);
@@ -132,11 +151,21 @@ int main(void)
   */
 
   //Rysowanie kolorowego gradientu na wyswietlaczu:
+  /*
   for (int y = 0; y < LCD_HEIGHT; y++) {
     for (int x = 0; x < LCD_WIDTH; x++) {
       lcd_put_pixel(x, y, __REV16(x / 10 + y * 16));
     }
   }
+  */
+  //Wykorzystanie biblioteki hagl do rysowania zaokraglonego prostokata oraz do pisania tekstu:
+  for (int i = 0; i < 8; i++) {
+    hagl_draw_rounded_rectangle(2+i, 2+i, 158-i, 126-i, 8-i, rgb565(0, 0, i*16));
+  }
+
+  hagl_put_text(L"Hello World!", 40, 55, YELLOW, font6x9);
+
+  //Przesylanie danych z bufora na wyswietlacz:
   lcd_copy();
 
   /* USER CODE END 2 */
