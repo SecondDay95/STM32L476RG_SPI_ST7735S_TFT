@@ -1,3 +1,4 @@
+"./Core/Src/forbot_logo.o"
 "./Core/Src/gpio.o"
 "./Core/Src/lcd.o"
 "./Core/Src/main.o"

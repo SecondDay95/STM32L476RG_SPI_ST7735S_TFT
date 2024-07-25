@@ -6,3 +6,4 @@
 ../Core/Src/lcd.c:149:13:lcd_set_window	1
 ../Core/Src/lcd.c:161:6:lcd_fill_box	2
 ../Core/Src/lcd.c:175:6:lcd_put_pixel	1
+../Core/Src/lcd.c:183:6:lcd_draw_image	2

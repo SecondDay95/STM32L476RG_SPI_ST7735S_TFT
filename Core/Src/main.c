@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
+#include "forbot_logo.c"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -108,6 +109,9 @@ int main(void)
     lcd_put_pixel(i,  i, RED);
     lcd_put_pixel(127 - i,  i, RED);
   }
+
+  //Rysowanie obrazu:
+  lcd_draw_image(35, 20, 100, 80, forbot_logo);
 
   /* USER CODE END 2 */
 
