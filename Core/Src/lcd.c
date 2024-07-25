@@ -61,6 +61,10 @@ static const uint16_t init_table[] = {
   CMD(ST7735S_MADCTL), 0xa0,
 };
 
+//Tablica przechowujaca bufor obrazu (posiada tyle elementów aby mozna bylo w niej zapisac
+//dane o kolorach wszystkich pikseli):
+static uint16_t frame_buffer[LCD_WIDTH * LCD_HEIGHT];
+
 //Funkcja wysylajaca komende do wyswietlacza (static oznacza ze funkcja nie jest widoczna
 //w innych plikach, a ta funkcja bedzie uzywana tylko w tym pliku):
 static void lcd_cmd(uint8_t cmd) {
@@ -158,6 +162,7 @@ static void lcd_set_window(int x, int y, int width, int height)
 }
 
 //Funkcja rysujaca kolorowy prostokat:
+/*
 void lcd_fill_box(int x, int y, int width, int height, uint16_t color) {
 
 	//Ustawienie obszaru rysowania:
@@ -170,24 +175,61 @@ void lcd_fill_box(int x, int y, int width, int height, uint16_t color) {
 	}
 
 }
+*/
 
 //Funkcja rysujaca pojedynczy pixel:
-void lcd_put_pixel(int x, int y, uint16_t color) {
+/*
+ void lcd_put_pixel(int x, int y, uint16_t color) {
 
 	//Rysowanie pojedynczego pixela sprowadza sie do narysowania prostokata o
 	//wymiarach  1 x 1:
 	lcd_fill_box(x, y, 1, 1, color);
 }
+*/
+
+//Funkcaj gromadzaca dane o kolorze pojedynczych pixeli w buforze:
+void lcd_put_pixel(int x, int y, uint16_t color) {
+
+	frame_buffer[x + y * LCD_WIDTH] = color;
+}
 
 //Funkcja rysujaca obrazy:
+/*
 void lcd_draw_image(int x, int y, int width, int height, const uint8_t* data)
 {
 
+	//Przesylanie danych cyklicznie bajt po bajcie
+	//lcd_set_window(x, y, width, height);
+
+	//lcd_cmd(ST7735S_RAMWR);
+	//for (int i = 0; i < width * height * 2; i++)
+	//	lcd_data(data[i]);
+
+
+	//Optymalizacja rysowania obrazów - przesylanie wszystkich bajtów na raz
+	//(calej tablicy na raz):
 	lcd_set_window(x, y, width, height);
 
 	lcd_cmd(ST7735S_RAMWR);
-	for (int i = 0; i < width * height * 2; i++)
-		lcd_data(data[i]);
+	HAL_GPIO_WritePin(LCD_DC_GPIO_Port, LCD_DC_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi2, (uint8_t*)data, width * height * 2, HAL_MAX_DELAY);
+	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+
 
 }
+*/
 
+
+//Funkcja kopiujaca zawartosc bufora do wyswietlacza:
+void lcd_copy(void) {
+
+	//Wyslanie danych o kolorach dla pojedynczych pixeli do wyswietlacza:
+	lcd_set_window(0, 0, LCD_WIDTH, LCD_HEIGHT);
+	lcd_cmd(ST7735S_RAMWR);
+	HAL_GPIO_WritePin(LCD_DC_GPIO_Port, LCD_DC_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi2, (uint8_t*)frame_buffer, sizeof(frame_buffer), HAL_MAX_DELAY);
+	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+
+}

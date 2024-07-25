@@ -56,7 +56,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint16_t test_image[64 * 64];
 /* USER CODE END 0 */
 
 /**
@@ -95,6 +95,7 @@ int main(void)
   lcd_init();
 
   //Rysowanie kolorowych prostokatow:
+  /*
   lcd_fill_box(0, 0, 160, 16, RED);
   lcd_fill_box(0, 16, 160, 16, GREEN);
   lcd_fill_box(0, 32, 160, 16, BLUE);
@@ -103,15 +104,40 @@ int main(void)
   lcd_fill_box(0, 80, 160, 16, CYAN);
   lcd_fill_box(0, 96, 160, 16, WHITE);
   lcd_fill_box(0, 112, 160, 16, BLACK);
+  */
 
   //Rysowanie 2 skrzyżowanych ze soba linii:
+  /*
   for (int i = 0; i < 128; i++) {
     lcd_put_pixel(i,  i, RED);
     lcd_put_pixel(127 - i,  i, RED);
   }
+  */
 
   //Rysowanie obrazu:
+  /*
   lcd_draw_image(35, 20, 100, 80, forbot_logo);
+  */
+
+  //Rysowanie obrazów białych prostokatow:
+  /*
+  for (int i = 0; i < 64 * 64; i++)
+    test_image[i] = __REV16(BLUE);
+
+  lcd_draw_image(0, 0, 64, 64, test_image);
+  lcd_draw_image(16, 16, 64, 64, test_image);
+  lcd_draw_image(32, 32, 64, 64, test_image);
+  lcd_draw_image(48, 48, 64, 64, test_image);
+  lcd_draw_image(64, 64, 64, 64, test_image);
+  */
+
+  //Rysowanie kolorowego gradientu na wyswietlaczu:
+  for (int y = 0; y < LCD_HEIGHT; y++) {
+    for (int x = 0; x < LCD_WIDTH; x++) {
+      lcd_put_pixel(x, y, __REV16(x / 10 + y * 16));
+    }
+  }
+  lcd_copy();
 
   /* USER CODE END 2 */
 
