@@ -18,13 +18,16 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "dma.h"
 #include "spi.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include <stdio.h>
 #include "lcd.h"
 #include "forbot_logo.c"
 //Dodanie plikow naglowkowych do funkcji uzywanych przez biblioteke hagl:
@@ -65,6 +68,17 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 uint16_t test_image[64 * 64];
 
+int __io_putchar(int ch)
+{
+  if (ch == '\n') {
+    __io_putchar('\r');
+  }
+
+  HAL_UART_Transmit(&huart2, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
+
+  return 1;
+}
+
 //Funkcja wywolywna po zakonczeniu transmisji przez SPI:
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
 
@@ -73,6 +87,20 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
 		lcd_transfer_done();
 
 	}
+}
+uint32_t last_fotoresistor_value = 0;
+void draw_progress_bar(uint32_t fotoresistor_value) {
+
+	int y;
+	y = 0.09 * fotoresistor_value - 2.7;
+	while (lcd_is_busy()) {}
+	if(fotoresistor_value >= last_fotoresistor_value)
+		hagl_fill_rectangle(31, 49, 29 + y, 41, YELLOW);
+	else
+		hagl_fill_rectangle(30 + y, 49, 128, 41, BLACK);
+	lcd_copy();
+	last_fotoresistor_value = fotoresistor_value;
+
 }
 
 /* USER CODE END 0 */
@@ -108,6 +136,8 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_SPI2_Init();
+  MX_ADC1_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   //Inicjalizacja wyswietlacza:
@@ -163,10 +193,31 @@ int main(void)
     hagl_draw_rounded_rectangle(2+i, 2+i, 158-i, 126-i, 8-i, rgb565(0, 0, i*16));
   }
 
-  hagl_put_text(L"Hello World!", 40, 55, YELLOW, font6x9);
+  hagl_put_text(L"Jasnosc pomieszczenia", 16, 25, YELLOW, font6x9);
+
+  //Zolty autobus
+  /*
+  hagl_fill_circle(30, 100, 5, GREEN);
+  hagl_fill_circle(90, 100, 5, GREEN);
+  hagl_fill_rounded_rectangle(10, 95, 110, 55, 4, YELLOW);
+  hagl_fill_rounded_rectangle(110, 95, 130, 75, 4, YELLOW);
+  hagl_fill_rounded_rectangle(90, 75, 110, 55, 4, WHITE);
+  hagl_draw_rectangle(60, 90, 80, 60, BLACK);
+  hagl_fill_rectangle(65, 85, 75, 65, WHITE);
+  hagl_fill_rectangle(40, 75, 50, 65, WHITE);
+  hagl_fill_rectangle(20, 75, 30, 65, WHITE);
+  */
+
+  //Obramowanie progress_bar:
+  hagl_draw_rectangle(30, 50, 130, 40, YELLOW);
 
   //Przesylanie danych z bufora na wyswietlacz:
   lcd_copy();
+
+  volatile static uint16_t value;
+  HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&value, 1);
+  //HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&value, 1);
 
   /* USER CODE END 2 */
 
@@ -174,6 +225,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+	  printf("ADC = %u\n", value);
+	  draw_progress_bar(value);
+
+	  HAL_Delay(250);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

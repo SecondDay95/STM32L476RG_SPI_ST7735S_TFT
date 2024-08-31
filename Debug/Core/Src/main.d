@@ -17,6 +17,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h \
@@ -25,8 +28,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
- ../Core/Inc/dma.h ../Core/Inc/main.h ../Core/Inc/spi.h \
- ../Core/Inc/gpio.h ../Core/Inc/lcd.h ../Core/Src/forbot_logo.c \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
+ ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/spi.h \
+ ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/lcd.h \
+ ../Core/Src/forbot_logo.c \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hagl.h \
  ../Core/Inc/hagl_hal.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h \
@@ -54,6 +60,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h:
@@ -62,9 +71,13 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h:
-../Core/Inc/dma.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
+../Core/Inc/adc.h:
 ../Core/Inc/main.h:
+../Core/Inc/dma.h:
 ../Core/Inc/spi.h:
+../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/lcd.h:
 ../Core/Src/forbot_logo.c:
