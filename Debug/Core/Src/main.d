@@ -38,6 +38,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/font6x9.h \
+ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/font5x7.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb565.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb888.h \
  C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hsl.h
@@ -86,6 +87,7 @@ C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/h
 C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h:
 C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/bitmap.h:
 C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/font6x9.h:
+C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/font5x7.h:
 C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb565.h:
 C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/rgb888.h:
 C:/Users/Secon/OneDrive/Pulpit/STM32L4/Projekty/9_SPI_ST7735S_TFT/hagl/include/hsl.h:
